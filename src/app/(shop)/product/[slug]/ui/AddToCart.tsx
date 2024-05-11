@@ -4,15 +4,14 @@ import { useState } from "react";
 
 import { QuantitySelector, SizeSelector } from "@/components";
 import type { CartProduct, Product, Size } from "@/interfaces";
-import { useCartStore } from '@/store';
+import { useCartStore } from "@/store";
 
 interface Props {
   product: Product;
 }
 
 export const AddToCart = ({ product }: Props) => {
-
-  const addProductToCart = useCartStore( state => state.addProductTocart );
+  const addProductToCart = useCartStore((state) => state.addProductTocart);
 
   const [size, setSize] = useState<Size | undefined>();
   const [quantity, setQuantity] = useState<number>(1);
@@ -30,23 +29,20 @@ export const AddToCart = ({ product }: Props) => {
       price: product.price,
       quantity: quantity,
       size: size,
-      image: product.images[0]
-    }
+      image: product.images[0],
+    };
 
     addProductToCart(cartProduct);
     setPosted(false);
     setQuantity(1);
     setSize(undefined);
-
-
   };
-
 
   return (
     <>
       {posted && !size && (
         <span className="mt-2 text-red-500 fade-in">
-          Debe de seleccionar una talla*
+         You have to select a size
         </span>
       )}
 
@@ -62,7 +58,7 @@ export const AddToCart = ({ product }: Props) => {
 
       {/* Button */}
       <button onClick={addToCart} className="btn-primary my-5">
-        Agregar al carrito
+        Add to cart
       </button>
     </>
   );
